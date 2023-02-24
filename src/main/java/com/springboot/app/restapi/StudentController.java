@@ -12,13 +12,8 @@ import java.util.List;
 // Every URL path has to be unique
 @RestController
 public class StudentController {
-    // GET HTTP method
-    // Spring MVC uses the Jackson library and message converters to convert Java objects into JSON
-    // http://localhost:8080/student
-    @GetMapping("/student")
-    public Student getStudent(){
-        return new Student("Harry", "Owen");
-    }
+
+
     // http://localhost:8080/students
     // Returns array list of JSON objects to client
     @GetMapping("/students")

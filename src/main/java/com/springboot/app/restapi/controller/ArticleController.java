@@ -1,8 +1,9 @@
-package com.springboot.app.restapi;
+package com.springboot.app.restapi.controller;
 
+import com.springboot.app.restapi.dao.ArticleDao;
+import com.springboot.app.restapi.model.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 // A simple Springboot RESTAPI which returns a JSON to the
 // Every URL path has to be unique
 @RestController
+@CrossOrigin
 public class ArticleController {
 
     private final ArticleDao articleDao;
@@ -42,14 +44,4 @@ public class ArticleController {
     public void postArticle(@RequestBody Article article){
         articleDao.save(article);
     }
-
-    private Article createArticle(String headline, String body, String imagePath){
-        Article article = new Article();
-        article.setHeadline(headline);
-        article.setBody(body);
-        article.setImagePath(imagePath);
-        article.setDateTime(LocalDateTime.now());
-        return article;
-    }
-
 }

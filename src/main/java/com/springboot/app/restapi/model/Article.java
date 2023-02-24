@@ -1,4 +1,4 @@
-package com.springboot.app.restapi;
+package com.springboot.app.restapi.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,4 +21,5 @@ public class Article {
     private String body;
     private String imagePath;
     private LocalDateTime dateTime;
+
 }

@@ -1,4 +1,4 @@
-package com.springboot.app.restapi;
+package com.springboot.app.restapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

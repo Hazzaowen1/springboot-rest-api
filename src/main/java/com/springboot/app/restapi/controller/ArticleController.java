@@ -44,4 +44,16 @@ public class ArticleController {
     public void postArticle(@RequestBody Article article){
         articleDao.save(article);
     }
+
+    @PostMapping("/article/add")
+    private Article createArticle(String headline, String body, String imagePath){
+        Article article = new Article();
+        article.setHeadline(headline);
+        article.setBody(body);
+        article.setImagePath(imagePath);
+        article.setDateTime(LocalDateTime.now());
+        return article;
+    }
+
+
 }

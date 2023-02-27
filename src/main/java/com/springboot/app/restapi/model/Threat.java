@@ -4,21 +4,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "article")
-public class Article {
-
+@Table(name = "threat")
+public class Threat {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private String headline;
-    private String body;
-    private String imagePath;
-    private LocalDateTime dateTime;
+    private String boxColour;
+    private String boxText;
+    private String description;
 
 }

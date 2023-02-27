@@ -87,6 +87,7 @@ p {
 }
 
 .status-red {
+    width: 40px;
     background-color: red;
     color: white;
     font-weight: bold;
@@ -97,6 +98,7 @@ p {
 }
 
 .status-amber {
+    width: 70px;
     background-color: rgb(255, 187, 0);
     color: white;
     font-weight: bold;
@@ -107,6 +109,7 @@ p {
 }
 
 .status-green {
+    width: 40px;
     background-color: rgb(60, 255, 0);
     color: white;
     font-weight: bold;
@@ -119,5 +122,4 @@ p {
 .status-description {
     margin: 0;
     font-size: 1rem;
-    color: red;
 }

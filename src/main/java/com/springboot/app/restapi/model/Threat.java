@@ -13,8 +13,9 @@ public class Threat {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private String boxColour;
-    private String boxText;
+    private String type;
+    private String level;
+    private String colour;
     private String description;
 
 }

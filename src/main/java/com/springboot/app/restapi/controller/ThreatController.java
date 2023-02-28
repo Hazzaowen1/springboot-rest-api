@@ -22,15 +22,16 @@ public class ThreatController {
     }
 
     @GetMapping("/threats")
-    public List<Threat> getThreats(@RequestParam(required = false) String type, @RequestParam(required = false) String level) {
+    public List<Threat> getAllThreats() {
+        return threatDao.findAll();
+    }
+
+    @GetMapping("/threats/query")
+    public List<Threat> getFilteredThreats(@RequestParam("type") String type, @RequestParam("level") String level) {
         List<Threat> threats = threatDao.findAll();
-        if (type != null && level != null) {
-            return threats.stream()
-                    .filter(threat -> threat.getType().equals(type) && threat.getLevel().equals(level))
-                    .collect(Collectors.toList());
-        } else {
-            return threats;
-        }
+        return threats.stream()
+                .filter(threat -> threat.getType().equals(type) && threat.getLevel().equals(level))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/threats/{id}")
@@ -42,5 +43,4 @@ public class ThreatController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Threat with id " + id + "not found" );
         }
     }
-
 }

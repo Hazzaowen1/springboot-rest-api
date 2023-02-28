@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GraphDao extends JpaRepository<Graph, Long> {}
+public interface CovidDao extends JpaRepository<Graph, Long> {
+    Graph findByType(String type);
+}

@@ -74,102 +74,12 @@
     </div>
 </div>
 
-<script>
-    var ctx = document.getElementById('covidCasesChart').getContext('2d');
-    var covidCasesChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            datasets: [{
-                label: 'Number of Cases 2022',
-                data: [19, 18, 7, 5, 3, 3],
-                backgroundColor: 'rgba(0, 188, 212, 0.2)',
-                borderColor: 'rgba(0, 188, 212, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-</script>
-
-<script>
-    const data = {
-        labels: ['Housing & Bills', 'Food & Drinks', 'Health', 'Alcohol & Tobacco', 'Clothing'],
-        datasets: [{
-            label: '(%) Increase: ',
-            data: [25, 17, 6, 5, 6],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 206, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(153, 102, 255)'
-            ],
-            borderWidth: 1
-        }]
-    };
-
-    const options = {
-        plugins: {
-            title: {
-                display: true,
-                text: 'Industrial Inflation (%)'
-            }
-        }
-
-    };
-
-    const inflationChart = new Chart(document.getElementById('inflationChart'), {
-        type: 'doughnut',
-        data: data,
-        options: options
-    });
-</script>
-<script>
-    var ctx = document.getElementById('crimeChart').getContext('2d');
-    var crimeChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            datasets: [{
-                label: 'Cases of crime (100s)',
-                data: [40, 40, 60, 30, 20, 20],
-                backgroundColor: 'rgba(0, 188, 212, 0.2)',
-                borderColor: 'rgba(0, 188, 212, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-</script>
 
 <script>
 
     $(document).ready(function () {
-        $.get( "http://localhost:8080/articles", function( data ) {
+
+        $.get("http://localhost:8080/articles", function (data) {
             for (let i = 0; i < data.length; i++) {
                 var article = data[i];
                 var headline = article.headline;
@@ -187,7 +97,7 @@
         });
 
         //THREAT GET REQUEST
-        $.get( "http://localhost:8080/threats/query?type=terror&level=Low", function( data ) {
+        $.get("http://localhost:8080/threats/query?type=terror&level=Low", function (data) {
             for (let i = 0; i < data.length; i++) {
                 var threat = data[i];
                 var type = threat.type
@@ -205,7 +115,7 @@
             }
         });
 
-        $.get( "http://localhost:8080/threats/query?type=weather&level=High", function( data ) {
+        $.get("http://localhost:8080/threats/query?type=weather&level=High", function (data) {
             for (let i = 0; i < data.length; i++) {
                 var threat = data[i];
                 var type = threat.type
@@ -222,7 +132,100 @@
                 );
             }
         });
+
+        $.get("http://localhost:8080/crime/graph", function (data) {
+            var ctx = document.getElementById('crimeChart').getContext('2d');
+            var crimeChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Cases of crime (100s)',
+                        data: data.data,
+                        backgroundColor: 'rgba(0, 188, 212, 0.2)',
+                        borderColor: 'rgba(0, 188, 212, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+        const data = {
+            labels: ['Housing & Bills', 'Food & Drinks', 'Health', 'Alcohol & Tobacco', 'Clothing'],
+            datasets: [{
+                label: '(%) Increase: ',
+                data: [25, 17, 6, 5, 6],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 206, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const options = {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Industrial Inflation (%)'
+                }
+            }
+
+        };
+
+        const inflationChart = new Chart(document.getElementById('inflationChart'), {
+            type: 'doughnut',
+            data: data,
+            options: options
+        });
+
+
+        $.get("http://localhost:8080/covid/graph", function (data) {
+            var ctx = document.getElementById('covidCasesChart').getContext('2d');
+            var covidCasesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Number of Cases 2022',
+                        data: data.data,
+                        backgroundColor: 'rgba(0, 188, 212, 0.2)',
+                        borderColor: 'rgba(0, 188, 212, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
     });
+
 </script>
 </body>
 </html>

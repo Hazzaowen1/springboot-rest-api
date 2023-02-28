@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
@@ -21,37 +22,15 @@ public class ThreatController {
     }
 
     @GetMapping("/threats")
-    public List<Threat> getThreats() {
-        return threatDao.findAll();
-    }
-
-
-    @GetMapping("/threats/terror/low")
-    public List<Threat> getLowTerrorThreats() {
-        return getThreats().stream()
-                .filter(threat -> threat.getType().equals("terror") && threat.getLevel().equals("Low"))
-                .toList();
-    }
-
-    @GetMapping("/threats/terror/high")
-    public List<Threat> getHighTerrorThreats() {
-        return getThreats().stream()
-                .filter(threat -> threat.getType().equals("terror") && threat.getLevel().equals("High"))
-                .toList();
-    }
-
-    @GetMapping("/threats/weather/low")
-    public List<Threat> getLowWeatherThreats() {
-        return getThreats().stream()
-                .filter(threat -> threat.getType().equals("weather") && threat.getLevel().equals("Low"))
-                .toList();
-    }
-
-    @GetMapping("/threats/weather/high")
-    public List<Threat> getHighWeatherThreats() {
-        return getThreats().stream()
-                .filter(threat -> threat.getType().equals("weather") && threat.getLevel().equals("High"))
-                .toList();
+    public List<Threat> getThreats(@RequestParam(required = false) String type, @RequestParam(required = false) String level) {
+        List<Threat> threats = threatDao.findAll();
+        if (type != null && level != null) {
+            return threats.stream()
+                    .filter(threat -> threat.getType().equals(type) && threat.getLevel().equals(level))
+                    .collect(Collectors.toList());
+        } else {
+            return threats;
+        }
     }
 
     @GetMapping("/threats/{id}")

@@ -46,6 +46,11 @@ ul {
     padding: 0;
 }
 
+ul#articles-section img {
+    width: 150px;
+    height: 150px;
+}
+
 ul li {
     margin-bottom: 10px;
 }

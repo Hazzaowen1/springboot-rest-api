@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "threat")
-public class Threat {
+@Table(name = "warning")
+public class Warning {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private String type;
-    private String level;
-    private String colour;
+    private String name;
+    private Integer level;
     private String description;
 
 }

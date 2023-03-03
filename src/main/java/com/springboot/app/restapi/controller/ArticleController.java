@@ -54,6 +54,4 @@ public class ArticleController {
         article.setDateTime(LocalDateTime.now());
         return article;
     }
-
-
 }

@@ -19,6 +19,5 @@ public class Article {
     private String headline;
     private String body;
     private String imagePath;
-    private LocalDateTime dateTime;
 
 }
